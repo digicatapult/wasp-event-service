@@ -2,6 +2,29 @@ apiVersion: v1
 entries:
   wasp-event-service:
   - apiVersion: v2
+    appVersion: 0.0.4
+    created: "2021-05-04T07:53:30.213118839Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: ^10.3.9
+    - condition: kafka.enabled
+      name: kafka
+      repository: https://charts.bitnami.com/bitnami
+      version: 12.7.3
+    description: A Helm chart for wasp-event-service
+    digest: 5ae031d820453e78a459873f9c1958af745dd0afbd772297100fce55086ee17c
+    maintainers:
+    - email: opensource@digicatapult.org.uk
+      name: cdecatapult
+      url: www.digicatapult.org.uk
+    name: wasp-event-service
+    type: application
+    urls:
+    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
     appVersion: 0.0.3
     created: "2021-04-20T11:32:01.990842038Z"
     dependencies:
@@ -85,4 +108,4 @@ entries:
     urls:
     - https://CDECatapult.github.io/wasp-service-template/wasp-service-template-0.0.1.tgz
     version: 0.0.1
-generated: "2021-04-20T11:32:01.977553688Z"
+generated: "2021-05-04T07:53:30.199898153Z"
