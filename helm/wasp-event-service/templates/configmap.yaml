@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "wasp-event-service.fullname" . }}-config
+  labels:
+    {{- include "wasp-event-service.labels" . | nindent 4 }}
+data:
+  port: {{ .Values.config.port | quote }}
+  logLevel: {{ .Values.config.logLevel }}
+  dbHost: {{ include "wasp-event-service.postgresql.fullname" . }}
+  dbPort: {{ .Values.config.dbPort | quote }}
+  dbName: {{ .Values.config.dbName }}
+  eventsApiOffsetLimit: {{ .Values.config.eventsApiOffsetLimit | quote }}
+  kafkaLogLevel: {{ .Values.config.kafkaLogLevel | quote }}
+  kafkaBrokers: {{ include "wasp-event-service.kafka.brokers" . }}
+  kafkaEventsTopic: {{ .Values.config.kafkaEventsTopic }}
+  eventsPartitions: {{ .Values.config.eventsPartitions | quote }}
+  eventsReplicationFactor: {{ .Values.config.eventsReplicationFactor | quote }}
+  kafkaEventsNotificationsTopic: {{ .Values.config.kafkaEventsNotificationsTopic | quote }}

@@ -1,0 +1,8 @@
+image:
+  repository: 'wasp-event-service'
+  tag: 'latest'
+  PullPolicy: Never
+kafka:
+  enabled: true
+config:
+  kafkaBrokers: null

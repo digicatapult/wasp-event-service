@@ -1,4 +1,11 @@
 # Github CODEOWNERS file
 
 # Default code-owners for this repository
-*       @mattdean-digicatapult @darrylmorton-digicatapult @dblane-digicatapult @jonmattgray
+*       @mattdean-digicatapult @darrylmorton-digicatapult @dblane-digicatapult
+
+# infrastructure code
+/helm   @dblane-digicatapult
+
+# js app and test code
+/app    @mattdean-digicatapult @darrylmorton-digicatapult @jonmattgray
+/test   @mattdean-digicatapult @darrylmorton-digicatapult @jonmattgray
