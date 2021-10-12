@@ -17,12 +17,12 @@ entries:
     digest: b36da8622d9adc0c6962ba0ec642059fc1e7dc2356141fdc69a8d7125e84ed5d
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.9.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.9.tgz
     version: 0.0.9
   - apiVersion: v2
     appVersion: 0.0.8
@@ -40,12 +40,12 @@ entries:
     digest: c4af48d24b0c228c290004735e319502b4543b7ae41c02cbf4490404bf31f3a1
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.8.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.8.tgz
     version: 0.0.8
   - apiVersion: v2
     appVersion: 0.0.7
@@ -63,12 +63,12 @@ entries:
     digest: b1718dda3e679abdab911b5f85fe727a07f60f65c14c01b58b953b28b3da2b67
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.7.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.7.tgz
     version: 0.0.7
   - apiVersion: v2
     appVersion: 0.0.6
@@ -86,12 +86,12 @@ entries:
     digest: 1ff008703bfe3413634a232f955f6a51240d6dfb98cc0cb0bbc0c23c9bc100fb
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.6.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.6.tgz
     version: 0.0.6
   - apiVersion: v2
     appVersion: 0.0.5
@@ -109,12 +109,12 @@ entries:
     digest: 068da35774aae73d60ee6b732552bf0ca5cc9b890ca2a5042ea6fb0f61ffa0fe
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.5.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.5.tgz
     version: 0.0.5
   - apiVersion: v2
     appVersion: 0.0.4
@@ -132,12 +132,12 @@ entries:
     digest: 5ae031d820453e78a459873f9c1958af745dd0afbd772297100fce55086ee17c
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.4.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.4.tgz
     version: 0.0.4
   - apiVersion: v2
     appVersion: 0.0.3
@@ -155,12 +155,12 @@ entries:
     digest: f3af21b93c84af92bdcd9bad6288593b40181a96e238a8906fcbbc8d80ff8a0a
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.3.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.3.tgz
     version: 0.0.3
   - apiVersion: v2
     appVersion: 0.0.2
@@ -178,12 +178,12 @@ entries:
     digest: edea9a1683f823852caf22451928b924ec12dd7e7918afb46d6cfdd67a92e8e0
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.2.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.2.tgz
     version: 0.0.2
   - apiVersion: v2
     appVersion: 0.0.1
@@ -201,12 +201,12 @@ entries:
     digest: 836bfc3ccd5074ddbbb9c45c8cc7f24a92747dfe288c78db1c48765ee45c0805
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: cdecatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-event-service
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-event-service/wasp-event-service-0.0.1.tgz
+    - https://digicatapult.github.io/wasp-event-service/wasp-event-service-0.0.1.tgz
     version: 0.0.1
   wasp-service-template:
   - apiVersion: v2
@@ -216,11 +216,11 @@ entries:
     digest: 04bdba0fc0fede8c2a1f8c10dee07227850f196356ec524a26d0bf52aae57add
     maintainers:
     - email: opensource@digicatapult.org.uk
-      name: CDECatapult
+      name: digicatapult
       url: www.digicatapult.org.uk
     name: wasp-service-template
     type: application
     urls:
-    - https://CDECatapult.github.io/wasp-service-template/wasp-service-template-0.0.1.tgz
+    - https://digicatapult.github.io/wasp-service-template/wasp-service-template-0.0.1.tgz
     version: 0.0.1
 generated: "2021-10-11T08:52:59.928317626Z"
