@@ -1,4 +1,6 @@
-const { PORT, API_VERSION } = require('../env')
+import env from '../env.js'
+
+const { PORT, API_VERSION } = env
 
 const apiDoc = {
   openapi: '3.0.3',
@@ -61,4 +63,4 @@ const apiDoc = {
   paths: {},
 }
 
-module.exports = apiDoc
+export default apiDoc

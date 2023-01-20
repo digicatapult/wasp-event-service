@@ -1,6 +1,6 @@
-const { isUuidInvalid, validateGetEventsRequestQuery, isPostRequestBodyInvalid } = require('../../../../validatorUtil')
+import { isUuidInvalid, validateGetEventsRequestQuery, isPostRequestBodyInvalid } from '../../../../validatorUtil.js'
 
-module.exports = function (eventService) {
+export default function (eventService) {
   const doc = {
     GET: async function (req, res) {
       const { offset, limit, type, sortByTimestamp, sortByType, startDate, endDate } = req.query

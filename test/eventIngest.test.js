@@ -1,11 +1,11 @@
-const { describe, before, it } = require('mocha')
-const { expect } = require('chai')
+import { describe, before, it } from 'mocha'
+import { expect } from 'chai'
 
-const { setupServer } = require('./helpers/server')
-const { setupKafka, getConsumer } = require('./helpers/kafka')
-const { setupDb } = require('./helpers/db')
-const { publishEventAndWait, getEvents } = require('./helpers/events')
-const { assertEvents } = require('./helpers/assertions')
+import { setupServer } from './helpers/server.js'
+import { setupKafka, getConsumer } from './helpers/kafka.js'
+import { setupDb } from './helpers/db.js'
+import { publishEventAndWait, getEvents } from './helpers/events.js'
+import { assertEvents } from './helpers/assertions.js'
 
 describe('event ingest', function () {
   const context = {}

@@ -1,4 +1,4 @@
-const { findEventsByThingId, findEventByThingIdAndId, addEvent, updateEvent } = require('../../db')
+import { findEventsByThingId, findEventByThingIdAndId, addEvent, updateEvent } from '../../db.js'
 
 async function getEventByThingIdAndId({ thingId, eventId }) {
   const result = await findEventByThingIdAndId({ thingId, eventId })
@@ -38,7 +38,7 @@ async function putEvent({ thingId, eventId, details }) {
   return { statusCode: 200, result: updatedEvent[0] }
 }
 
-module.exports = {
+export default {
   getEventByThingIdAndId,
   getEventsByThingId,
   postEvent,
