@@ -1,17 +1,21 @@
-const { Kafka, logLevel: kafkaLogLevels } = require('kafkajs')
+import { Kafka, logLevel as kafkaLogLevels } from 'kafkajs'
 
-const { addEvent } = require('./db')
-const logger = require('./logger')
-const { KAFKA_BROKERS, KAFKA_LOG_LEVEL, KAFKA_EVENTS_TOPIC, KAFKA_EVENTS_NOTIFICATIONS_TOPIC } = require('./env')
+import { addEvent } from './db.js'
+import logger from './logger.js'
+import env from './env.js'
+
+const { KAFKA_BROKERS, KAFKA_LOG_LEVEL, KAFKA_EVENTS_TOPIC, KAFKA_EVENTS_NOTIFICATIONS_TOPIC } = env
 
 const setupEventsConsumer = async () => {
   const kafkaLogger = logger.child({ module: 'kafkajs-events', level: 'error' })
-  const logCreator = () => ({ label, log }) => {
-    const { message } = log
-    kafkaLogger[label.toLowerCase()]({
-      message,
-    })
-  }
+  const logCreator =
+    () =>
+    ({ label, log }) => {
+      const { message } = log
+      kafkaLogger[label.toLowerCase()]({
+        message,
+      })
+    }
 
   const kafka = new Kafka({
     clientId: 'event-service-events',
@@ -72,4 +76,4 @@ const setupEventsConsumer = async () => {
   }
 }
 
-module.exports = setupEventsConsumer
+export default setupEventsConsumer

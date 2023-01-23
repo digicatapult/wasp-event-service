@@ -49,7 +49,6 @@ npm test
 | DB_USERNAME                     |    Y     |         -            | Username to connect to the database with                                                            |
 | DB_PASSWORD                     |    Y     |         -            | Password to connect to the database with                                                            |
 | API_VERSION                     |    N     |`package.json version`| Package version of this service                                                                     |
-| API_MAJOR_VERSION               |    N     |         `v1`         | Major version of this service                                                                       |
 | API_OFFSET_LIMIT                |    N     |         100          | Maximum number of events returned by the API per response                                           |
 | KAFKA_LOG_LEVEL                 |    N     |      `nothing`       | Log level to use for the Kafka connection. Choices are 'debug', 'info', 'warn', 'error' or 'nothing'|
 | KAFKA_BROKERS                   |    N     |   `localhost:9092`   | Comma separated List of Kafka brokers to connect to                                                 |

@@ -1,17 +1,20 @@
-const { describe, before, it } = require('mocha')
-const { expect } = require('chai')
-const moment = require('moment')
-const delay = require('delay')
-const { setupServer } = require('./helpers/server')
-const { setupDb } = require('./helpers/db')
-const { API_MAJOR_VERSION, API_OFFSET_LIMIT } = require('../app/env')
-const {
+import { describe, before, it } from 'mocha'
+import { expect } from 'chai'
+import moment from 'moment'
+import delay from 'delay'
+
+import { setupServer } from './helpers/server.js'
+import { setupDb } from './helpers/db.js'
+import env from '../app/env.js'
+import {
   createEvent,
   createEvents,
   sortEventsByAscTimestamp,
   sortEventsByAscTypeAndAscTimestamp,
   sortEventsByDescTypeAndAscTimestamp,
-} = require('./helpers/events')
+} from './helpers/events.js'
+
+const { API_OFFSET_LIMIT } = env
 
 describe('Events', function () {
   const context = {}
@@ -35,13 +38,13 @@ describe('Events', function () {
       const events = createEvents({ date, thingId, total: 102 })
 
       events.forEach(async (event) => {
-        await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send(event)
+        await context.request.post(`/v1/thing/${thingId}/event`).send(event)
       })
       await delay(100)
     })
 
     it(`should return 200 with implicit default limit = ${API_OFFSET_LIMIT}`, async function () {
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(100)
@@ -49,7 +52,7 @@ describe('Events', function () {
 
     it(`should return 200 with limit - 1 = ${API_OFFSET_LIMIT - 1}`, async function () {
       let offset = API_OFFSET_LIMIT - 1
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/?offset=${offset}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?offset=${offset}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(3)
@@ -57,7 +60,7 @@ describe('Events', function () {
 
     it(`should return 200 with explicit default limit = ${API_OFFSET_LIMIT}`, async function () {
       const offset = API_OFFSET_LIMIT
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/?offset=${offset}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?offset=${offset}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(2)
@@ -65,7 +68,7 @@ describe('Events', function () {
 
     it(`should return 200 with limit = ${API_OFFSET_LIMIT + 2}`, async function () {
       const offset = API_OFFSET_LIMIT + 2
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/?offset=${offset}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?offset=${offset}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(0)
@@ -73,7 +76,7 @@ describe('Events', function () {
 
     it(`should return 200 with limit = ${API_OFFSET_LIMIT / 2} with valid override`, async function () {
       const limit = API_OFFSET_LIMIT / 2
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/?&limit=${limit}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?&limit=${limit}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(limit)
@@ -81,7 +84,7 @@ describe('Events', function () {
 
     it(`should return 200 with limit = ${API_OFFSET_LIMIT} with invalid override and fallback to env default`, async function () {
       const limit = 102
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/?&limit=${limit}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?&limit=${limit}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(API_OFFSET_LIMIT)
@@ -99,13 +102,13 @@ describe('Events', function () {
       eventsTail = events.length - 1
 
       events.forEach(async (event) => {
-        await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send(event)
+        await context.request.post(`/v1/thing/${thingId}/event`).send(event)
       })
       await delay(100)
     })
 
     it('should return 200 with implicit default ASC timestamp sorting', async function () {
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(events.length)
@@ -118,9 +121,7 @@ describe('Events', function () {
     it('should return 200 with explicit ASC timestamp sorting', async function () {
       const sortByTimestamp = 'asc'
 
-      context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}`
-      )
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(events.length)
@@ -137,9 +138,7 @@ describe('Events', function () {
       eventsCopy = sortEventsByAscTimestamp(eventsCopy)
       eventsCopy.reverse()
 
-      context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}`
-      )
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(eventsCopy.length)
@@ -155,7 +154,7 @@ describe('Events', function () {
       eventsCopy = sortEventsByAscTypeAndAscTimestamp(eventsCopy)
 
       context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}&sortByType=${sortByType}`
+        `/v1/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}&sortByType=${sortByType}`
       )
 
       expect(context.response.status).to.equal(200)
@@ -174,7 +173,7 @@ describe('Events', function () {
       eventsCopy = sortEventsByDescTypeAndAscTimestamp(eventsCopy)
 
       context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}&sortByType=${sortByType}`
+        `/v1/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}&sortByType=${sortByType}`
       )
 
       expect(context.response.status).to.equal(200)
@@ -194,7 +193,7 @@ describe('Events', function () {
       eventsCopy.reverse()
 
       context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}&sortByType=${sortByType}`
+        `/v1/thing/${thingId}/event/?sortByTimestamp=${sortByTimestamp}&sortByType=${sortByType}`
       )
 
       expect(context.response.status).to.equal(200)
@@ -223,13 +222,13 @@ describe('Events', function () {
       ]
 
       events.forEach(async (event) => {
-        await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send(event)
+        await context.request.post(`/v1/thing/${thingId}/event`).send(event)
       })
       await delay(100)
     })
 
     it(`should return 200 with the events filtered by a single event type`, async function () {
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/?type=${type}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?type=${type}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(30)
@@ -237,9 +236,7 @@ describe('Events', function () {
     })
 
     it(`should return 200 with the events filtered by multiple event types`, async function () {
-      context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?type=${type}&type=${anotherType}`
-      )
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?type=${type}&type=${anotherType}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(40)
@@ -248,7 +245,7 @@ describe('Events', function () {
 
     it(`should return 200 for invalid/nonexistent event type`, async function () {
       type = null
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/?type=${type}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/?type=${type}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body).to.have.length(0)
@@ -268,14 +265,14 @@ describe('Events', function () {
       endDate = events[88].timestamp
 
       events.forEach(async (event) => {
-        await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send(event)
+        await context.request.post(`/v1/thing/${thingId}/event`).send(event)
       })
       await delay(100)
     })
 
     it(`should return 200 within date range`, async function () {
       context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?startDate=${startDate}&endDate=${endDate}`
+        `/v1/thing/${thingId}/event/?startDate=${startDate}&endDate=${endDate}`
       )
 
       expect(context.response.status).to.equal(200)
@@ -287,7 +284,7 @@ describe('Events', function () {
       const endDate = null
 
       context.response = await context.request.get(
-        `/${API_MAJOR_VERSION}/thing/${thingId}/event/?startDate=${startDate}&endDate=${endDate}`
+        `/v1/thing/${thingId}/event/?startDate=${startDate}&endDate=${endDate}`
       )
 
       expect(context.response.status).to.equal(200)
@@ -301,16 +298,14 @@ describe('Events', function () {
     })
 
     it('should return 400 (invalid thingId)', async function () {
-      context.response = await context.request
-        .post(`/${API_MAJOR_VERSION}/thing/000a0000-a00a-00a0-a000-0000000000/event`)
-        .send(event)
+      context.response = await context.request.post(`/v1/thing/000a0000-a00a-00a0-a000-0000000000/event`).send(event)
 
       expect(context.response.status).to.equal(400)
       expect(context.response.body).to.deep.equal({})
     })
 
     it('should return 400 (invalid request body', async function () {
-      context.response = await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send({})
+      context.response = await context.request.post(`/v1/thing/${thingId}/event`).send({})
 
       expect(context.response.status).to.equal(400)
       expect(context.response.body).to.deep.equal({})
@@ -318,7 +313,7 @@ describe('Events', function () {
 
     it('should return 201', async function () {
       const event = createEvent({ thingId })
-      context.response = await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send(event)
+      context.response = await context.request.post(`/v1/thing/${thingId}/event`).send(event)
 
       expect(context.response.status).to.equal(201)
       expect(context.response.body.type).to.equal(event.type)
@@ -332,9 +327,9 @@ describe('Events', function () {
 
     it('should return 200', async function () {
       const event = createEvent({ thingId })
-      const { body } = await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send(event)
+      const { body } = await context.request.post(`/v1/thing/${thingId}/event`).send(event)
 
-      context.response = await context.request.get(`/${API_MAJOR_VERSION}/thing/${thingId}/event/${body.id}`)
+      context.response = await context.request.get(`/v1/thing/${thingId}/event/${body.id}`)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body.thingId).to.equal(event.thingId)
@@ -349,7 +344,7 @@ describe('Events', function () {
 
     it('should return 400 (invalid thingId and eventId uuid)', async function () {
       context.response = await context.request.put(
-        `/${API_MAJOR_VERSION}/thing/000a0000-a00a-00a0-a000-0000000000/event/000a0000-a00a-00a0-a000-0000000000`
+        `/v1/thing/000a0000-a00a-00a0-a000-0000000000/event/000a0000-a00a-00a0-a000-0000000000`
       )
 
       expect(context.response.status).to.equal(400)
@@ -358,7 +353,7 @@ describe('Events', function () {
 
     it('should return 400 (invalid eventId uuid)', async function () {
       context.response = await context.request.put(
-        `/${API_MAJOR_VERSION}/thing/000a0000-a00a-00a0-a000-000000000000/event/000a0000-a00a-00a0-a000-0000000000`
+        `/v1/thing/000a0000-a00a-00a0-a000-000000000000/event/000a0000-a00a-00a0-a000-0000000000`
       )
 
       expect(context.response.status).to.equal(400)
@@ -367,9 +362,7 @@ describe('Events', function () {
 
     it('should return 400 (invalid request body)', async function () {
       context.response = await context.request
-        .put(
-          `/${API_MAJOR_VERSION}/thing/000a0000-a00a-00a0-a000-000000000000/event/000a0000-a00a-00a0-a000-000000000000`
-        )
+        .put(`/v1/thing/000a0000-a00a-00a0-a000-000000000000/event/000a0000-a00a-00a0-a000-000000000000`)
         .send()
 
       expect(context.response.status).to.equal(400)
@@ -381,9 +374,7 @@ describe('Events', function () {
         details: { message: 'updated type, name and timestamp!' },
       }
       context.response = await context.request
-        .put(
-          `/${API_MAJOR_VERSION}/thing/000a0000-a00a-00a0-a000-000000000000/event/000a0000-a00a-00a0-a000-000000000000`
-        )
+        .put(`/v1/thing/000a0000-a00a-00a0-a000-000000000000/event/000a0000-a00a-00a0-a000-000000000000`)
         .send(updatedEvent)
 
       expect(context.response.status).to.equal(404)
@@ -392,13 +383,11 @@ describe('Events', function () {
 
     it('should return 200', async function () {
       const event = createEvent({ thingId })
-      const { body } = await context.request.post(`/${API_MAJOR_VERSION}/thing/${thingId}/event`).send(event)
+      const { body } = await context.request.post(`/v1/thing/${thingId}/event`).send(event)
       const updatedEvent = {
         details: { message: 'updated type, name and timestamp!' },
       }
-      context.response = await context.request
-        .put(`/${API_MAJOR_VERSION}/thing/${thingId}/event/${body.id}`)
-        .send(updatedEvent)
+      context.response = await context.request.put(`/v1/thing/${thingId}/event/${body.id}`).send(updatedEvent)
 
       expect(context.response.status).to.equal(200)
       expect(context.response.body.thingId).to.equal(thingId)

@@ -1,5 +1,7 @@
-const knex = require('knex')
-const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = require('./env')
+import knex from 'knex'
+
+import env from './env.js'
+const { DB_HOST, DB_PORT, DB_USERNAME, DB_PASSWORD, DB_NAME } = env
 
 const client = knex({
   client: 'pg',
@@ -83,10 +85,4 @@ const updateEvent = async ({ thingId, eventId, details }) => {
     .where({ thing_id: thingId, id: eventId })
 }
 
-module.exports = {
-  client,
-  addEvent,
-  findEventsByThingId,
-  findEventByThingIdAndId,
-  updateEvent,
-}
+export { client, addEvent, findEventsByThingId, findEventByThingIdAndId, updateEvent }

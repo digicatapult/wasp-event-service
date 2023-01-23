@@ -1,6 +1,8 @@
-const delay = require('delay')
-const { KAFKA_EVENTS_TOPIC } = require('../../app/env')
-const { getProducer } = require('./kafka')
+import delay from 'delay'
+import env from '../../app/env.js'
+import { getProducer } from './kafka.js'
+
+const { KAFKA_EVENTS_TOPIC } = env
 
 const getEventCount = async (context) => {
   const eventCountArr = await context.db('events').count()
@@ -118,7 +120,7 @@ const sortEventsByDescTypeAndAscTimestamp = (events) => {
   return events.sort(eventSortByDescTypeAndAscTimestampFn)
 }
 
-module.exports = {
+export {
   publishEventAndWait,
   getEvents,
   createEvent,

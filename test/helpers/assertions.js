@@ -1,4 +1,4 @@
-const { expect } = require('chai')
+import { expect } from 'chai'
 
 const assertEvent = (result, expectation) => {
   expect(result.thing_id).to.equal(expectation.thingId)
@@ -14,7 +14,4 @@ const assertEvents = (result, expectation) => {
   }
 }
 
-module.exports = {
-  assertEvent,
-  assertEvents,
-}
+export { assertEvent, assertEvents }

@@ -1,6 +1,8 @@
-const validator = require('validator')
-const moment = require('moment')
-const { API_OFFSET_LIMIT } = require('../app/env')
+import validator from 'validator'
+import moment from 'moment'
+import env from '../app/env.js'
+
+const { API_OFFSET_LIMIT } = env
 
 const isUuidInvalid = (uuid) => {
   return !uuid || !validator.isUUID(uuid)
@@ -58,9 +60,4 @@ const isPutRequestBodyInvalid = ({ details }) => {
   }
 }
 
-module.exports = {
-  isUuidInvalid,
-  validateGetEventsRequestQuery,
-  isPostRequestBodyInvalid,
-  isPutRequestBodyInvalid,
-}
+export { isUuidInvalid, validateGetEventsRequestQuery, isPostRequestBodyInvalid, isPutRequestBodyInvalid }
