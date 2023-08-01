@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-event-service",
-  "version": "0.1.40",
+  "version": "0.1.41",
   "description": "Event service for WASP",
   "main": "app/index.js",
   "scripts": {
