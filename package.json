@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-event-service",
-  "version": "0.1.56",
+  "version": "0.1.57",
   "description": "Event service for WASP",
   "main": "app/index.js",
   "scripts": {
@@ -40,12 +40,12 @@
     "moment": "^2.29.4",
     "pg": "^8.11.3",
     "pino": "^8.15.0",
-    "pino-http": "^8.4.0",
+    "pino-http": "^8.5.0",
     "swagger-ui-express": "^5.0.0",
     "validator": "^13.11.0"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.22.11",
+    "@babel/eslint-parser": "^7.22.15",
     "@babel/plugin-syntax-import-assertions": "^7.22.5",
     "c8": "^8.0.1",
     "chai": "^4.3.8",
