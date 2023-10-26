@@ -1,6 +1,6 @@
 {
   "name": "@digicatapult/wasp-event-service",
-  "version": "0.1.63",
+  "version": "0.1.64",
   "description": "Event service for WASP",
   "main": "app/index.js",
   "scripts": {
@@ -39,7 +39,7 @@
     "knex": "^2.5.1",
     "moment": "^2.29.4",
     "pg": "^8.11.3",
-    "pino": "^8.16.0",
+    "pino": "^8.16.1",
     "pino-http": "^8.5.0",
     "swagger-ui-express": "^5.0.0",
     "validator": "^13.11.0"
