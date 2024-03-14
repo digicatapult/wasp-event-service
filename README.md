@@ -1,5 +1,9 @@
 # wasp-event-service
 
+## Deprecation Notice
+`WASP` was deprecated on March 14th 2024, there will be no further dependency or security updates to this platform.
+---
+
 Event service for `WASP`. Handles the storage and retrieval of events.
 
 ## Getting started
